@@ -1,5 +1,7 @@
 package at.fhj.swengb.assignments.functional
 
+import java.security.KeyStore.TrustedCertificateEntry
+
 /**
   * In this assignment you have the chance to demonstrate basic understanding of
   * functions like map/filter/foldleft a.s.o.
@@ -9,12 +11,14 @@ object FunctionalAssignment {
   /**
     * A function which returns its parameters in a changed order. Look at the type signature.
     */
-  def flip[A, B](t: (A, B)): (B, A) = ???
+  def flip[A, B](t: (A, B)): (B, A) = (t._2,t._1)
+
+
 
   /**
     * given a Seq[A] and a function f : A => B, return a Seq[B]
     */
-  def unknown[A, B](as: Seq[A], fn: A => B): Seq[B] = ???
+  def unknown[A, B](as: Seq[A], fn: A => B): Seq[B] = as.map(x=> fn(x))
 
   /**
     * Returns the absolute value of the parameter i.
@@ -22,7 +26,7 @@ object FunctionalAssignment {
     * @param i a value, either with a positive or a negative sign.
     * @return
     */
-  def abs(i: Int): Int = ???
+  def abs(i: Int): Int = if (i <0) return i*(-1) else return i
 
 
   // Describe with your own words what this function does.
@@ -34,14 +38,14 @@ object FunctionalAssignment {
   //
   /**
     *
-    * @param as
-    * @param b
-    * @param fn
-    * @tparam A
-    * @tparam B
-    * @return
+    * @param as values :sequence, collection of values
+    * @param b accumulator: accumulator
+    * @param fn funktion: function that converts a type A value into a type B value
+    * @tparam A typ A can be anything that can be in a Sequence
+    * @tparam B type B can be anything
+    * @return interates over every entry of as and compares the outcome of the function with the current accumulator and gives in the end one value back
     */
-  def op[A, B](as: Seq[A], b: B)(fn: (B, A) => B): B = as.foldLeft(b)(fn)
+  def op[A, B](values: Seq[A], accumulator: B)(funktion: (B, A) => B): B = values.foldLeft(accumulator)(funktion)
 
   /**
     * implement the summation of the given numbers parameter.
@@ -50,7 +54,7 @@ object FunctionalAssignment {
     * @param numbers
     * @return
     */
-  def sum(numbers: Seq[Int]): Int = ???
+  def sum(numbers: Seq[Int]): Int = op(numbers,0)(_+_)
 
 
   /**
@@ -63,7 +67,10 @@ object FunctionalAssignment {
     * @param i parameter for which the factorial must be calculated
     * @return i!
     */
-  def fact(i: Int): Int = ???
+  def fact(i: Int): Int= i match {
+    case 0 =>1
+    case _=> i*fact(i-1)
+  }
 
   /**
     * compute the n'th fibonacci number
@@ -73,7 +80,10 @@ object FunctionalAssignment {
     *
     * https://en.wikipedia.org/wiki/Fibonacci_number
     */
-  def fib(n: Int): Int = ???
+  def fib(n: Int): Int = n match{
+    case n if n <=1 => n
+    case n =>fib(n-1)+fib(n-2)
+  }
 
   /**
     * Implement a isSorted which checks whether an Array[A] is sorted according to a
@@ -82,7 +92,20 @@ object FunctionalAssignment {
     * Implementation hint: you always have to compare two consecutive elements of the array.
     * Elements which are equal are considered to be ordered.
     */
-  def isSorted[A](as: Array[A], gt: (A, A) => Boolean): Boolean = ???
+  def isSorted[A](as: Array[A], gt: (A, A) => Boolean): Boolean = {
+    def isSortedRec(n:Int):Boolean= {
+      if (n >=as.length -1)true
+      else !gt(as(n),as(n+1))&& isSortedRec(n+1)
+
+    }
+    isSortedRec(0)
+
+  }
+
+
+
+
+
 
   /**
     * Takes both lists and combines them, element per element.
@@ -90,7 +113,7 @@ object FunctionalAssignment {
     * If one sequence is shorter than the other one, the function stops at the last element
     * of the shorter sequence.
     */
-  def genPairs[A, B](as: Seq[A], bs: Seq[B]): Seq[(A, B)] = ???
+  def genPairs[A, B](as: Seq[A], bs: Seq[B]): Seq[(A, B)] =  as.zip(bs)
 
   // a simple definition of a linked list, we define our own list data structure
   sealed trait MyList[+A]
