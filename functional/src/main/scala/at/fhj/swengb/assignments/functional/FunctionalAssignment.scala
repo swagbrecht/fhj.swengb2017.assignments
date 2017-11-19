@@ -38,9 +38,9 @@ object FunctionalAssignment {
   //
   /**
     *
-    * @param as values :sequence, collection of values
-    * @param b accumulator: accumulator
-    * @param fn funktion: function that converts a type A value into a type B value
+    * @param values (as): sequence, collection of values
+    * @param accumulator (b): accumulator
+    * @param funktion (fn): function that converts a type A value into a type B value
     * @tparam A typ A can be anything that can be in a Sequence
     * @tparam B type B can be anything
     * @return interates over every entry of as and compares the outcome of the function with the current accumulator and gives in the end one value back
@@ -115,6 +115,8 @@ object FunctionalAssignment {
     */
   def genPairs[A, B](as: Seq[A], bs: Seq[B]): Seq[(A, B)] =  as.zip(bs)
 
+
+
   // a simple definition of a linked list, we define our own list data structure
   sealed trait MyList[+A]
 
@@ -126,9 +128,17 @@ object FunctionalAssignment {
   // it also provides a convenience constructor in order to instantiate a MyList without hassle
   object MyList {
 
-    def sum(list: MyList[Int]): Int = ???
+    def sum(list: MyList[Int]): Int = list match{
+      case MyNil => 0
+      case Cons(head,tail) => head + sum(tail)
+    }
 
-    def product(list: MyList[Int]): Int = ???
+    def product(list: MyList[Int]): Int = list match {
+      case MyNil => 1
+      case Cons(0, _) => 0
+      case Cons(head,tail) => head * product(tail)
+    }
+
 
     def apply[A](as: A*): MyList[A] = {
       if (as.isEmpty) MyNil
