@@ -2,8 +2,8 @@ package at.fhj.swengb.assignments.tree
 
 import javafx.scene.paint.Color
 
-import scala.math.BigDecimal.RoundingMode
 import scala.util.Random
+import javafx.scene.paint.Color
 
 object Graph {
 
@@ -39,7 +39,16 @@ object Graph {
     * @param convert a converter function
     * @return
     */
-  def traverse[A, B](tree: Tree[A])(convert: A => B): Seq[B] =  ???
+  def traverse[A, B](tree: Tree[A])(convert: A => B): Seq[B] =  {
+    def nodesIntoSeq(elem: Tree[A], list: Seq[A]):Seq[A] = {
+      elem match {
+        case Node(x) => list.seq :+ x
+        case Branch(left,right) =>
+          nodesIntoSeq(left, nodesIntoSeq(right,list))
+      }
+    }
+    nodesIntoSeq(tree, List()).reverse.map(convert)
+  }
 
 
   /**
@@ -61,16 +70,91 @@ object Graph {
               treeDepth: Int,
               factor: Double = 0.75,
               angle: Double = 45.0,
-              colorMap: Map[Int, Color] = Graph.colorMap): Tree[L2D] = ???
+              colorMap: Map[Int, Color] = Graph.colorMap): Tree[L2D] = {
 
+    require(treeDepth >= 0 && treeDepth <= (colorMap.size - 1))
+
+    /** create a Branch
+      * @param leaf   leaf (root of subtree)
+      * @param factor factor of decreasing length
+      * @param angle  Angle between child and root
+      * @param color  Color of childs
+      *
+      * @return A Subtree with given node as root and a left & right child
+      */
+    def mkSubTree(leaf: Node[L2D],
+                      factor: Double,
+                      angle: Double,
+                      color: Color): Branch[L2D] = {
+      //Create new childs
+      val leftNode = Node(leaf.value.left(factor, angle, color))
+      val rightNode = Node(leaf.value.right(factor, angle, color))
+
+      //Return subtree
+      Branch(leaf, Branch(leftNode, rightNode))
+    }
+
+    /**
+      * creates a tree with a certain depth.
+      * @param currentTree Current tree (will be increased to given level)
+      * @param depth    Depth start value
+      * @param maxDepth Maximum depth of tree. limited by amount of colors
+      * @return
+      */
+    def mkTree(currentTree: Tree[L2D],
+                   depth: Int,
+                   maxDepth: Int): Tree[L2D] = {
+      if (depth == maxDepth)
+        currentTree
+      else {
+        /** add a new level to the tree
+          * A tree can look like:
+          *   Node(x) => Its a level 0 tree(just root). Create a subtree out of it. (create Level 1)
+          *   Branch(Node,Branch(Node,Node) => It is a leaf. In this case a new level needs to added
+          *   Branch(Node(Branch(Branch,Branch) => Somewhere in the middle of the tree. Just iterate further
+          * @param tree - Tree to verify and add new level is possible in this iteration
+          * @param currentLevel - current level of iteration. Defines color for new possible created level
+          * @return Tree with new level if neccessary in given iteration.
+          */
+        def addNewLevel(tree: Tree[L2D], currentLevel: Int): Branch[L2D] = {
+          tree match {
+            case Node(root) =>
+              /*lv1: only root --> Create branch */
+              mkSubTree(Node(root), factor, angle, colorMap(currentLevel))
+            case Branch(Node(root), Branch(Node(left), Node(right))) =>
+              /*leaf --> new lvl */
+              val newLeftSubtree =
+                mkSubTree(Node(left), factor, angle, colorMap(currentLevel))
+              val newRightSubtree =
+                mkSubTree(Node(right), factor, angle, colorMap(currentLevel))
+              Branch(Node(root), Branch(newLeftSubtree, newRightSubtree))
+            case Branch(Node(root), Branch(left, right)) =>
+              /*subtree inside tree --> go deeper on both sides and increase level*/
+              Branch(Node(root),
+                Branch(addNewLevel(left, depth + 1),
+                  addNewLevel(right, depth + 1)))
+          }
+        }
+        mkTree(addNewLevel(currentTree, depth), depth + 1, maxDepth)
+      }
+    }
+    // Create initial Root node / Tree according to depth
+    val rootNode: Tree[L2D] = Node(
+      L2D(start, initialAngle, length, colorMap(0)))
+    // Append tree
+    treeDepth match {
+      case 0 => rootNode
+      case _ => mkTree(rootNode, 0, treeDepth)
+    }
+  }
 }
-
 
 
 
 object L2D {
 
   import MathUtil._
+
 
   /**
     * Given a startpoint, an angle and a length the endpoint of the line
@@ -125,6 +209,4 @@ case class L2D(start: Pt2D, end: Pt2D, color: Color) {
     L2D(end, angle + deltaAngle, length * factor, c)
   }
 
-
 }
-
