@@ -49,8 +49,7 @@ object Graph {
     }
     nodesIntoSeq(tree, List()).reverse.map(convert)
   }
-
-
+  
   /**
     * Creates / constructs a tree graph.
     *
