@@ -9,14 +9,20 @@
 
 | 29.11.17
 | 1
-| Review of this and that
+| look at what has to be done and read through the existing files
 
-| 30.11.17
-| 5
-| implemented css
-
-| 11.07.17
+| 1.12.17
 | 2
-| fixed bugs
+| drawing the lookings of the calc on paper
 
-|===
+| 3.12
+| 3
+| first trys wof making the calculator look like it should (fail)
+
+| 5.12
+| 3
+| still trying to let it look like it should
+
+| 8.12
+| 3
+| finally figured out how to implement the design & finished designing

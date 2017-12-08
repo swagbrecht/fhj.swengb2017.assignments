@@ -32,17 +32,18 @@ case class RpnCalculator(stack: List[Op] = Nil) {
     * @param op
     * @return
     */
-  def push(op: Op): Try[RpnCalculator] = ???
+  def push(op: Op): Try[RpnCalculator] = Try(RpnCalculator(stack:+op))
 
   /**
     * Pushes val's on the stack.
     *
     * If op is not a val, pop two numbers from the stack and apply the operation.
     *
-    * @param op
+    * @param ops
     * @return
     */
-  def push(op: Seq[Op]): Try[RpnCalculator] = ???
+  def push(ops: Seq[Op]): Try[RpnCalculator] = ???
+
 
   /**
     * Returns an tuple of Op and a RevPolCal instance with the remainder of the stack.
@@ -63,5 +64,5 @@ case class RpnCalculator(stack: List[Op] = Nil) {
     *
     * @return
     */
-  def size: Int = ???
+  def size: Int = stack.length
 }
