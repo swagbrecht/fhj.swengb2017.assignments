@@ -1,5 +1,7 @@
 package at.fhj.swengb.apps.calculator
 
+import java.util.NoSuchElementException
+
 import scala.util.Try
 
 /**
@@ -57,7 +59,9 @@ case class RpnCalculator(stack: List[Op] = Nil) {
     *
     * @return
     */
-  def peek(): Op = ???
+  def peek(): Op = ??? //{
+   // if(stack.nonEmpty)stack.head
+   // else throw NoSuchElementException}
 
   /**
     * returns the size of the stack.

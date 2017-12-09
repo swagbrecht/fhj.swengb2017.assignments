@@ -92,12 +92,12 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-       <Button fx:id="btEnter" layoutX="211.0" layoutY="137.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="202.0" styleClass="sonst" text="ENTER" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="10">
+       <Button fx:id="btEnter" layoutX="211.0" layoutY="137.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="202.0" styleClass="sonst" text="↵" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets bottom="50.0" right="43.0" top="5.0" />
          </GridPane.margin>
          <font>
-            <Font size="18.0" />
+            <Font size="48.0" />
          </font></Button>
        <Button fx:id="btVorzeichen" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="yellow" text="+/-" GridPane.columnIndex="3" GridPane.rowIndex="8">
          <font>
