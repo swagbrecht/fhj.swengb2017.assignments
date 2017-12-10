@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
@@ -135,17 +136,6 @@
          <GridPane.margin>
             <Insets bottom="2.0" />
          </GridPane.margin></Button>
-      <Label fx:id="lable" prefHeight="100" prefWidth="420.0" styleClass="white" text="Label" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets bottom="5.0" left="50.0" right="43.0" top="10.0" />
-         </GridPane.margin>
-         <font>
-            <Font size="24.0" />
-         </font>
-         <padding>
-            <Insets left="20.0" />
-         </padding>
-      </Label>
       <Label alignment="TOP_CENTER" maxWidth="420.0" minWidth="420.0" text="This is a calculator by HyperVee" GridPane.columnSpan="3">
          <GridPane.margin>
             <Insets left="50.0" top="10.0" />
@@ -154,6 +144,11 @@
             <Insets right="10.0" />
          </padding>
       </Label>
+      <TextField prefHeight="100.0" prefWidth="420.0" styleClass="white" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="50.0" right="43.0" top="10.0" />
+         </GridPane.margin>
+      </TextField>
         <!--
        -->
     </children>
