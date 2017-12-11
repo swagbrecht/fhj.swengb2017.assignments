@@ -15,14 +15,30 @@
 | 2
 | drawing the lookings of the calc on paper
 
-| 3.12
+| 3.12.17
 | 3
-| first trys of making the calculator look like it should (fail)
+| first trys of making the calculator look like it should (fail)(😭)
 
-| 5.12
+| 5.12.17
 | 3
 | still trying to let it look like it should
 
-| 8.12
+| 8.12.17
 | 3
 | finally figured out how to implement the design & finished designing
+
+| 8.12.17
+| 3
+| trying to figure out how to get the calculator to work(with RPN, how to "connect the buttons"), reread the existing code
+
+| 9.12.17
+| 8
+| coding (trying out (some crazy shit is going on)) & changed design
+
+| 10.12.17
+| 9
+| continue coding 🤔
+
+| 11.12.17
+| 6
+| finally done: tests pass 😌 //good night!

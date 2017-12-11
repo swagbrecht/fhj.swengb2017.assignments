@@ -2,7 +2,7 @@ package at.fhj.swengb.apps.calculator
 
 import java.util.NoSuchElementException
 
-import scala.util.Try
+import scala.util.{Failure, Success, Try}
 
 /**
   * Companion object for our reverse polish notation calculator.
@@ -16,7 +16,20 @@ object RpnCalculator {
     * @param s a string representing a calculation, for example '1 2 +'
     * @return
     */
-  def apply(s: String): Try[RpnCalculator] = ???
+  def apply(s: String): Try[RpnCalculator] = {
+    def _apply(op: List[Op], calc: RpnCalculator): Try[RpnCalculator] = op match {
+      case Nil => Success(calc)
+      case head::Nil => calc.push(head)
+      case head::tail => calc.push(head) match {
+        case Success(c) => _apply(tail, c)
+        case Failure(e) => Failure(e)
+      }
+    }
+
+    if (s == "") { return Success(RpnCalculator()) }
+
+    _apply(s.split(" ").map(Op(_)).toList, RpnCalculator())
+  }
 
 }
 
@@ -34,7 +47,15 @@ case class RpnCalculator(stack: List[Op] = Nil) {
     * @param op
     * @return
     */
-  def push(op: Op): Try[RpnCalculator] = Try(RpnCalculator(stack:+op))
+  def push(op: Op): Try[RpnCalculator] = try {
+    op match {
+      case v: Val => Success(RpnCalculator(v :: stack))
+      case Mul => pop()._2.pop()._2.push(Mul.eval(pop()._1.asInstanceOf[Val], pop()._2.pop()._1.asInstanceOf[Val]))
+      case Sub => pop()._2.pop()._2.push(Sub.eval(pop()._1.asInstanceOf[Val], pop()._2.pop()._1.asInstanceOf[Val]))
+      case Add => pop()._2.pop()._2.push(Add.eval(pop()._1.asInstanceOf[Val], pop()._2.pop()._1.asInstanceOf[Val]))
+      case Div => pop()._2.pop()._2.push(Div.eval(pop()._1.asInstanceOf[Val], pop()._2.pop()._1.asInstanceOf[Val]))
+    }
+  } catch { case e: NoSuchElementException => Failure(e) }
 
   /**
     * Pushes val's on the stack.
@@ -44,7 +65,14 @@ case class RpnCalculator(stack: List[Op] = Nil) {
     * @param ops
     * @return
     */
-  def push(ops: Seq[Op]): Try[RpnCalculator] = ???
+  def push(ops: Seq[Op]): Try[RpnCalculator] = ops match {
+    case Nil => Success(this)
+    case head::Nil => push(head)
+    case head::tail => push(head) match {
+      case Success(c) => c.push(tail)
+      case Failure(e) => Failure(e)
+    }
+  }
 
 
   /**
@@ -52,16 +80,14 @@ case class RpnCalculator(stack: List[Op] = Nil) {
     *
     * @return
     */
-  def pop(): (Op, RpnCalculator) = ???
+  def pop(): (Op, RpnCalculator) = (peek(), RpnCalculator(stack.reverse.drop(1).reverse))
 
   /**
     * If stack is nonempty, returns the top of the stack. If it is empty, this function throws a NoSuchElementException.
     *
     * @return
     */
-  def peek(): Op = ??? //{
-   // if(stack.nonEmpty)stack.head
-   // else throw NoSuchElementException}
+  def peek(): Op = if (stack.nonEmpty) stack.last else throw new NoSuchElementException
 
   /**
     * returns the size of the stack.

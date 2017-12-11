@@ -20,7 +20,6 @@ object Op {
       case "+" => Add
       case "/" => Div
       case value => Val(value.toDouble)
-      case _ => ??? //wennst do einekimbst bist guad
     }
   }
 
@@ -52,11 +51,9 @@ case object Mul extends BinOp {
   * a Val(Double.NaN) shoudl be returned.
   */
 case object Div extends BinOp {
-  override def eval(left: Val, right: Val): Val = {
-    if (right.value.equals(0.0))
-      Val(Double.NaN)
-    else
-      Val(left.value / right.value)
+  override def eval(left: Val, right: Val): Val = right.value match {
+    case 0.0 => Val(Double.NaN)
+    case _ => Val(left.value / right.value)
   }
 }
 

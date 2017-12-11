@@ -12,166 +12,178 @@
 
 <GridPane id="calculator" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" styleClass="gridpane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhj.swengb.apps.calculator.CalculatorFxController">
     <children>
-      <Pane prefHeight="200.0" prefWidth="200.0" styleClass="black" GridPane.columnSpan="6" GridPane.rowSpan="11">
-         <GridPane.margin>
-            <Insets bottom="47.0" left="48.0" right="41.0" top="35.0" />
-         </GridPane.margin>
-      </Pane>
+        <Pane prefHeight="200.0" prefWidth="200.0" styleClass="black" GridPane.columnSpan="6" GridPane.rowSpan="11">
+            <GridPane.margin>
+                <Insets bottom="47.0" left="48.0" right="41.0" top="35.0" />
+            </GridPane.margin>
+        </Pane>
 
 
-        <Button fx:id="btnr1" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="0001" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="2.0" left="50.0" right="2.0" />
-         </GridPane.margin>
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <Button fx:id="btnr2" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="0010" GridPane.columnIndex="1" GridPane.rowIndex="4">
-         <GridPane.margin>
-            <Insets bottom="2.0" left="50.0" right="2.0" />
-         </GridPane.margin>
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <Button fx:id="btnr3" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="0011" GridPane.columnIndex="1" GridPane.rowIndex="6">
-         <GridPane.margin>
-            <Insets bottom="2.0" left="50.0" right="2.0" />
-         </GridPane.margin>
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <Button fx:id="btnr4" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="0100" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="2.0" right="2.0" top="1.0" />
-         </GridPane.margin></Button>
-        <Button fx:id="btnr5" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="0101" GridPane.columnIndex="2" GridPane.rowIndex="4">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="2.0" right="2.0" />
-         </GridPane.margin></Button>
-        <Button fx:id="btnr6" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="0110" GridPane.columnIndex="2" GridPane.rowIndex="6">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="2.0" right="2.0" />
-         </GridPane.margin></Button>
-        <Button fx:id="btnr7" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="0111" GridPane.columnIndex="3" GridPane.rowIndex="2">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="2.0" right="2.0" />
-         </GridPane.margin></Button>
-       <Button fx:id="btnr8" layoutX="211.0" layoutY="37.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="1000" GridPane.columnIndex="3" GridPane.rowIndex="4">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="2.0" right="2.0" />
-         </GridPane.margin></Button>
-       <Button fx:id="btnr9" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="1001" GridPane.columnIndex="3" GridPane.rowIndex="6">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="2.0" right="2.0" />
-         </GridPane.margin></Button>
-       <Button fx:id="btnr0" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="0000" GridPane.columnIndex="2" GridPane.rowIndex="8">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-       <Button fx:id="btPoint" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="yellow" text="point" GridPane.columnIndex="1" GridPane.rowIndex="8">
-         <GridPane.margin>
-            <Insets left="50.0" />
-         </GridPane.margin>
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-       <Button fx:id="btEnter" layoutX="211.0" layoutY="137.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="202.0" styleClass="sonst" text="↵" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="10">
-         <GridPane.margin>
-            <Insets bottom="50.0" right="43.0" top="5.0" />
-         </GridPane.margin>
-         <font>
-            <Font size="48.0" />
-         </font></Button>
-       <Button fx:id="btVorzeichen" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="yellow" text="+/-" GridPane.columnIndex="3" GridPane.rowIndex="8">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-       <Button fx:id="btClear" layoutX="211.0" layoutY="137.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="200.0" styleClass="sonst" text="clear" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="10">
-         <GridPane.margin>
-            <Insets bottom="50.0" left="50.0" top="5.0" />
-         </GridPane.margin>
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <Button fx:id="btDivide" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="yellow" text="divide" GridPane.columnIndex="4" GridPane.rowIndex="8">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <Button fx:id="btAdd" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="yellow" text="add" GridPane.columnIndex="4" GridPane.rowIndex="2">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="2.0" />
-         </GridPane.margin></Button>
-        <Button fx:id="btSubtract" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="yellow" text="subtract" GridPane.columnIndex="4" GridPane.rowIndex="4">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="2.0" />
-         </GridPane.margin></Button>
-        <Button fx:id="btMultiply" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="100.0" styleClass="yellow" text="multiply" GridPane.columnIndex="4" GridPane.rowIndex="6">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="2.0" />
-         </GridPane.margin></Button>
-      <Label alignment="TOP_CENTER" maxWidth="420.0" minWidth="420.0" text="This is a calculator by HyperVee" GridPane.columnSpan="3">
-         <GridPane.margin>
-            <Insets left="50.0" top="10.0" />
-         </GridPane.margin>
+        <Button fx:id="btnr1" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <GridPane.margin>
+                <Insets bottom="2.0" left="50.0" right="2.0" />
+            </GridPane.margin>
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <Button fx:id="btnr2" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="4" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <GridPane.margin>
+                <Insets bottom="2.0" left="50.0" right="2.0" />
+            </GridPane.margin>
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <Button fx:id="btnr3" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="7" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <GridPane.margin>
+                <Insets bottom="2.0" left="50.0" right="2.0" />
+            </GridPane.margin>
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <Button fx:id="btnr4" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="2" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="2.0" right="2.0" top="1.0" />
+            </GridPane.margin></Button>
+        <Button fx:id="btnr5" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="5" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="2.0" right="2.0" />
+            </GridPane.margin></Button>
+        <Button fx:id="btnr6" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="8" GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="2.0" right="2.0" />
+            </GridPane.margin></Button>
+        <Button fx:id="btnr7" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="3" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="2.0" right="2.0" />
+            </GridPane.margin></Button>
+        <Button fx:id="btnr8" layoutX="211.0" layoutY="37.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="6" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="2.0" right="2.0" />
+            </GridPane.margin></Button>
+        <Button fx:id="btnr9" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="9" GridPane.columnIndex="3" GridPane.rowIndex="6">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="2.0" right="2.0" />
+            </GridPane.margin></Button>
+        <Button fx:id="btnr0" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="grey" text="0" GridPane.columnIndex="2" GridPane.rowIndex="8">
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <Button fx:id="btPoint" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="blue" text="point" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <GridPane.margin>
+                <Insets left="50.0" />
+            </GridPane.margin>
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <Button fx:id="btEnter" layoutX="211.0" layoutY="137.0" mnemonicParsing="false" onAction="#sgn" prefHeight="100.0" prefWidth="202.0" styleClass="sonst" text="↵" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="10">
+            <GridPane.margin>
+                <Insets bottom="50.0" right="43.0" top="5.0" />
+            </GridPane.margin>
+            <font>
+                <Font size="48.0" />
+            </font></Button>
+        <Button fx:id="btVorzeichen" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="blue" text="+/-" GridPane.columnIndex="3" GridPane.rowIndex="8">
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <Button fx:id="btClear" layoutX="211.0" layoutY="137.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="200.0" styleClass="sonst" text="clear" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="10">
+            <GridPane.margin>
+                <Insets bottom="50.0" left="50.0" top="5.0" />
+            </GridPane.margin>
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <Button fx:id="btDivide" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="blue" text="divide" GridPane.columnIndex="4" GridPane.rowIndex="8">
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <Button fx:id="btAdd" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="blue" text="add" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="2.0" />
+            </GridPane.margin></Button>
+        <Button fx:id="btSubtract" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="blue" text="subtract" GridPane.columnIndex="4" GridPane.rowIndex="4">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="2.0" />
+            </GridPane.margin></Button>
+        <Button fx:id="btMultiply" layoutX="211.0" layoutY="137.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#inp" prefHeight="100.0" prefWidth="100.0" styleClass="blue" text="multiply" GridPane.columnIndex="4" GridPane.rowIndex="6">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="2.0" />
+            </GridPane.margin></Button>
+        <Label alignment="TOP_CENTER" maxWidth="420.0" minWidth="420.0" text="This is a calculator by HyperVee" GridPane.columnSpan="3">
+            <GridPane.margin>
+                <Insets left="50.0" top="10.0" />
+            </GridPane.margin>
+            <padding>
+                <Insets right="10.0" />
+            </padding>
+        </Label>
+        <TextField fx:id="numberTextField" prefHeight="100.0" prefWidth="420.0" styleClass="white" text="0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="50.0" right="43.0" top="10.0" />
+            </GridPane.margin>
+        </TextField>
+      <Label alignment="TOP_CENTER" layoutX="60.0" layoutY="20.0" maxWidth="420.0" minWidth="420.0" text="//some crazy code is going on" GridPane.columnSpan="3" GridPane.rowIndex="11">
          <padding>
             <Insets right="10.0" />
          </padding>
-      </Label>
-      <TextField prefHeight="100.0" prefWidth="420.0" styleClass="white" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets bottom="5.0" left="50.0" right="43.0" top="10.0" />
+            <Insets bottom="10.0" left="50.0" right="43.0" />
          </GridPane.margin>
-      </TextField>
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
         <!--
        -->
     </children>
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+    </rowConstraints>
 
 </GridPane>

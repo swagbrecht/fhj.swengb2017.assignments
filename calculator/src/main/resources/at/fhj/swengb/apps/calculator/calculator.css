@@ -9,8 +9,8 @@
 	-fx-background-color:#808080;
 }
 
-#calculator .yellow {
-	-fx-background-color:#eeaa00;
+#calculator .blue {
+	-fx-background-color:#CEE3F6;
 }
 
 #calculator .black {
@@ -22,5 +22,5 @@
 }
 
 #calculator .sonst {
-	-fx-background-color:#ff7700;
+	-fx-background-color:#58ACFA;
 }
