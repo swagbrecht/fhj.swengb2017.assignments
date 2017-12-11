@@ -5,7 +5,8 @@ import scala.util.Try
 /**
   * Companion object for our reverse polish notation calculator.
   */
-object RpnCalculator {
+object RpnCalculator  {
+
 
   /**
     * Returns empty RpnCalculator if string is empty, otherwise pushes all operations
@@ -14,7 +15,10 @@ object RpnCalculator {
     * @param s a string representing a calculation, for example '1 2 +'
     * @return
     */
-  def apply(s: String): Try[RpnCalculator] = ???
+  def apply(s: String): Try[RpnCalculator] = if (s.isEmpty) Try(RpnCalculator()) else {
+    val stack: List[Op] = s.split(' ').map(e => Op(e)).toList
+    stack.foldLeft(Try(RpnCalculator()))((acc, elem) => acc.get.push(elem))
+  }
 
 }
 
@@ -33,7 +37,10 @@ case class RpnCalculator(stack: List[Op] = Nil) {
     * @return
     */
   def push(op: Op): Try[RpnCalculator] = ???
-
+    //op match {
+    //  case value: Val => Try(RpnCalculator(stack :+ value))
+   //   case operation:
+   // }
   /**
     * Pushes val's on the stack.
     *

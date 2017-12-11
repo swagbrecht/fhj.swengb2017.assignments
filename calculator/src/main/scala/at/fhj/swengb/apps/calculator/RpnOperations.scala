@@ -20,6 +20,7 @@ object Op {
       case "+" => Add
       case "/" => Div
       case value => Val(value.toDouble)
+      case _ => ??? //if this happens, some crazy shit is going on...
     }
   }
 
