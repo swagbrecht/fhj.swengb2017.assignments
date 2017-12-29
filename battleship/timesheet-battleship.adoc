@@ -9,22 +9,46 @@
 | Actual Hours
 | Description
 
-| Arneitzj15
-| 29.11.17
-| 2
+| leifertv15 & lambrech16
+| 13.12.17
 | 1
-| Review of this and that
-
-| Arneitzj15
-| 30.11.17
 | 1
-| 5
-| implemented css
+| rereading the protobuf-assignment pdf
 
-| Heiderst16
-| 11.07.17
-| 2
-| 2
-| fixed bugs
+| leifertv15 & lambrech16
+| 14.12.17& 15.12.17
+| 3
+| 6
+| brainstorming: how are we going to make it
+
+| leifertv15 & lambrech16
+| 18.12.17
+| 4
+| 4
+| first tries with protobuf
+
+
+
+| leifertv15 & lambrech16
+| 20.12.17&22.12.17
+| 6
+| 10
+| creating proto & convertierungen(battleshipprotocol)
+
+
+| leifertv15 & lambrech16
+| 25.12.17 & 26.12.17 & 27.12.17
+| 12
+| 14
+| implementing load and save function (BattleshipFXController,fxml,BattleFXCell)
+
+
+| leifertv15 & lambrech16
+| 28.12.17 & 29.12.17
+| 4
+| 8
+| slider implementierung(fxml,BattleshipFXController,battleshipgame)
+)
+
 
 |===

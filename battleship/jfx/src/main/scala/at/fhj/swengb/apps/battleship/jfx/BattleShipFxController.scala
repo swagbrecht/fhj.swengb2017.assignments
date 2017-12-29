@@ -1,16 +1,19 @@
 package at.fhj.swengb.apps.battleship.jfx
 
 import java.net.URL
+import java.nio.file.{Files, Paths}
 import java.util.ResourceBundle
 import javafx.fxml.{FXML, Initializable}
-import javafx.scene.control.TextArea
+import javafx.scene.control.{Slider, TextArea}
 import javafx.scene.layout.GridPane
 
-import at.fhj.swengb.apps.battleship.model.{BattleField, BattleShipGame, Fleet, FleetConfig}
-
+import at.fhj.swengb.apps.battleship.BattleShipProtobuf
+import at.fhj.swengb.apps.battleship.BattleShipProtocol._
+import at.fhj.swengb.apps.battleship.model._
 
 class BattleShipFxController extends Initializable {
 
+  var game: BattleShipGame = _
 
   @FXML private var battleGroundGridPane: GridPane = _
 
@@ -19,8 +22,34 @@ class BattleShipFxController extends Initializable {
     */
   @FXML private var log: TextArea = _
 
+  @FXML private var slider: Slider = _
+
   @FXML
   def newGame(): Unit = initGame()
+
+  @FXML
+  def loadGame(): Unit = {
+    val path = Paths.get("target/saved.game")
+    val is = Files.newInputStream(path)
+    val battleShipGame = BattleShipProtobuf.BattleShipGame.parseFrom(is)
+    val game = BattleShipGame(getField(battleShipGame), getCellWidth, getCellHeight, appendLog, updateSliderState)
+    game.moves = getMoves(battleShipGame)
+    init(game)
+    game.initMoves()
+  }
+
+  @FXML
+  def saveGame(): Unit = {
+    val path = Paths.get("target/saved.game")
+    val os = Files.newOutputStream(path)
+    convert(game).writeTo(os)
+  }
+
+  @FXML
+  def onChangeSliderValue(): Unit = {
+    init(game)
+    game.initMoves(slider.getValue.toInt)
+  }
 
   override def initialize(url: URL, rb: ResourceBundle): Unit = initGame()
 
@@ -29,6 +58,10 @@ class BattleShipFxController extends Initializable {
   private def getCellWidth(x: Int): Double = battleGroundGridPane.getColumnConstraints.get(x).getPrefWidth
 
   def appendLog(message: String): Unit = log.appendText(message + "\n")
+
+  def updateSliderState(): Unit = {
+    slider.setValue(game.moves.length)
+  }
 
   /**
     * Create a new game.
@@ -45,6 +78,7 @@ class BattleShipFxController extends Initializable {
       battleGroundGridPane.add(c, c.pos.x, c.pos.y)
     }
     game.getCells().foreach(c => c.init)
+    this.game = game
   }
 
 
@@ -59,7 +93,7 @@ class BattleShipFxController extends Initializable {
 
     val battleField: BattleField = BattleField.placeRandomly(field)
 
-    BattleShipGame(battleField, getCellWidth, getCellHeight, appendLog)
+    BattleShipGame(battleField, getCellWidth, getCellHeight, appendLog, updateSliderState)
   }
 
 }

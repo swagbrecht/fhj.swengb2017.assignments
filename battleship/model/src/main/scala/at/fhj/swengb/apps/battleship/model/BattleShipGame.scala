@@ -6,7 +6,8 @@ package at.fhj.swengb.apps.battleship.model
 case class BattleShipGame(battleField: BattleField,
                           getCellWidth: Int => Double,
                           getCellHeight: Int => Double,
-                          log: String => Unit) {
+                          log: String => Unit,
+                          updateSliderState: () => Unit) {
 
   /**
     * remembers which vessel was hit at which position
@@ -20,6 +21,8 @@ case class BattleShipGame(battleField: BattleField,
     */
   var sunkShips: Set[Vessel] = Set()
 
+  var moves: List[BattlePos] = List()
+
   /**
     * We don't ever change cells, they should be initialized only once.
     */
@@ -31,11 +34,17 @@ case class BattleShipGame(battleField: BattleField,
       getCellHeight(y),
       log,
       battleField.fleet.findByPos(pos),
-      updateGameState)
+      updateGameState,
+      logMove)
   }
 
   def getCells(): Seq[BattleFxCell] = cells
 
+  def initMoves(): Unit = moves.foreach(clickCell)
+
+  def initMoves(n: Int): Unit = moves.take(n).foreach(clickCell)
+
+  private def clickCell(pos: BattlePos): Unit = cells(pos.x * battleField.width + pos.y).getOnMouseClicked.handle(null)
 
   def updateGameState(vessel: Vessel, pos: BattlePos): Unit = {
     log("Vessel " + vessel.name.value + " was hit at position " + pos)
@@ -80,6 +89,11 @@ case class BattleShipGame(battleField: BattleField,
       hits = hits.updated(vessel, Set(pos))
     }
 
+  }
+
+  def logMove(pos: BattlePos): Unit = {
+    if (!moves.contains(pos)) { moves = moves :+ pos }
+    updateSliderState()
   }
 
 
