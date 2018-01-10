@@ -8,6 +8,20 @@ option java_outer_classname = "BattleShipProtobuf";
 
 message BattleShipGame {
 
-    // TODO
+    uint32 Rows = 1;
+    uint32 Columns = 2;
+    repeated Vessel Vessels = 3;
+    repeated Position HitCells = 4;
 
+    message Position {
+        int32 Row = 1;
+        int32 Column = 2;
+    }
+
+    message Vessel {
+        string Alignment = 1;
+        string Name = 2;
+        int32 Size = 3;
+        Position Pos = 4;
+    }
 }
