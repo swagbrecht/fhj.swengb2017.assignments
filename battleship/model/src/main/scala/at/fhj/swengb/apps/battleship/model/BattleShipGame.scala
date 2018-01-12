@@ -4,11 +4,10 @@ package at.fhj.swengb.apps.battleship.model
   * Contains all information about a battleship game.
   */
 case class BattleShipGame(battleField: BattleField,
-                          log: String => Unit,
-                          updateSlider: Int => Unit,
                           getCellWidth: Int => Double,
                           getCellHeight: Int => Double,
-                          ) {
+                          log: String => Unit,
+                          updateSliderState: () => Unit) {
 
   /**
     * remembers which vessel was hit at which position
@@ -22,70 +21,80 @@ case class BattleShipGame(battleField: BattleField,
     */
   var sunkShips: Set[Vessel] = Set()
 
-  /**
-    * Contains all already clicked positions.
-    * Array keeps sorting...
-    */
-  var GameState: List[BattlePos] = List();
+  var moves: List[BattlePos] = List()
 
   /**
     * We don't ever change cells, they should be initialized only once.
     */
-  private val cells: Seq[BattleFxCell] = for {
-    x <- 0 until battleField.width
-    y <- 0 until battleField.height
-    pos = BattlePos(x, y)
-  } yield {
+  private val cells: Seq[BattleFxCell] = for {x <- 0 until battleField.width
+                                              y <- 0 until battleField.height
+                                              pos = BattlePos(x, y)} yield {
     BattleFxCell(BattlePos(x, y),
       getCellWidth(x),
       getCellHeight(y),
       log,
       battleField.fleet.findByPos(pos),
-      GameUpdater3000,
-      ClickReader3000)
+      updateGameState,
+      logMove)
   }
 
-  def CellReader3000(): Seq[BattleFxCell] = cells
+  def getCells(): Seq[BattleFxCell] = cells
 
-  def ClickReader3000(pos: BattlePos): Unit = {
-    GameState = pos :: GameState
-    updateSlider(GameState.size)
-  }
+  def initMoves(): Unit = moves.foreach(clickCell)
 
-  def RebuildGame(pos: List[BattlePos]): Unit = {
+  def initMoves(n: Int): Unit = moves.take(n).foreach(clickCell)
 
-    for (p <- pos) {
-      val Cell: BattleFxCell = cells.filter(e => e.pos.equals(p)).head
-      Cell.Clicker3000()
-    }
-  }
+  private def clickCell(pos: BattlePos): Unit = cells(pos.x * battleField.width + pos.y).getOnMouseClicked.handle(null)
 
-  def GameUpdater3000(vessel: Vessel, pos: BattlePos): Unit = {
-    log(vessel.name.value + "was hit!")
+  def updateGameState(vessel: Vessel, pos: BattlePos): Unit = {
+    log("Vessel " + vessel.name.value + " was hit at position " + pos)
 
-    if (GameState.contains(vessel)) {
+    if (hits.contains(vessel)) {
+      // this code is executed if vessel was already hit at least once
 
+      // pos
+      // vessel
+      // map (hits)
+
+      // we want to update the hits map
+      // the map should be updated if
+      // we hit a vessel which is already contained
+      // in the 'hits' map, and it's values (
+      // the set of BattlePos) should be added
+      // the current pos
       val oldPos: Set[BattlePos] = hits(vessel)
+
       hits = hits.updated(vessel, oldPos + pos)
+
       hits(vessel).foreach(p => log(p.toString))
 
       if (oldPos.contains(pos)) {
-        log("Area already hit!")
+        log("Position was triggered two times.")
       }
 
       if (vessel.occupiedPos == hits(vessel)) {
-        log(s"${vessel.name.value} annihilated!")
+        log(s"Ship ${vessel.name.value} was destroyed.")
         sunkShips = sunkShips + vessel
 
         if (battleField.fleet.vessels == sunkShips) {
-          log("GAME OVER!")
+          log("G A M E   totally  O V E R")
         }
       }
 
+
     } else {
+      // vessel is not part of the map
+      // but vessel was hit!
+      // it was hit the first time ever!
       hits = hits.updated(vessel, Set(pos))
     }
 
   }
+
+  def logMove(pos: BattlePos): Unit = {
+    if (!moves.contains(pos)) { moves = moves :+ pos }
+    updateSliderState()
+  }
+
 
 }
