@@ -1,9 +1,9 @@
 package at.fhj.swengb.assignments.tree
 
+import java.util.Currency
 import javafx.scene.paint.Color
 
 import scala.util.Random
-import javafx.scene.paint.Color
 
 object Graph {
 
@@ -23,12 +23,14 @@ object Graph {
   /**
     * creates a random tree
     *
-    * @param root
+    * @param root - Startpoint of graph
     * @return
     */
   def randomTree(root: Pt2D): Tree[L2D] =
-    mkGraph(root, Random.nextInt(360), Random.nextDouble() * 150, Random.nextInt(7))
-
+    mkGraph(root,
+      Random.nextInt(360),
+      Random.nextDouble() * 150,
+      Random.nextInt(7))
 
   /**
     * Given a Tree of L2D's and a function which can convert any L2D to a Line,
@@ -39,15 +41,9 @@ object Graph {
     * @param convert a converter function
     * @return
     */
-  def traverse[A, B](tree: Tree[A])(convert: A => B): Seq[B] =  {
-    def nodesIntoSeq(elem: Tree[A], list: Seq[A]):Seq[A] = {
-      elem match {
-        case Node(x) => list.seq :+ x
-        case Branch(left,right) =>
-          nodesIntoSeq(left, nodesIntoSeq(right,list))
-      }
-    }
-    nodesIntoSeq(tree, List()).reverse.map(convert)
+  def traverse[A, B](tree: Tree[A])(convert: A => B): Seq[B] = tree match {
+    case Node(x) => Seq(convert(x))
+    case Branch(left, right) => traverse(left)(convert) ++ traverse(right)(convert)
   }
 
   /**
@@ -71,89 +67,36 @@ object Graph {
               angle: Double = 45.0,
               colorMap: Map[Int, Color] = Graph.colorMap): Tree[L2D] = {
 
-    require(treeDepth >= 0 && treeDepth <= (colorMap.size - 1))
+    def NewBranch(leaf: Node[L2D], factor: Double, angle: Double, color: Color): Branch[L2D] =
+      Branch(leaf, Branch(Node(leaf.value.left(factor, angle, color)), Node(leaf.value.right(factor, angle, color))))
 
-    /** create a Branch
-      * @param leaf   leaf (root of subtree)
-      * @param factor factor of decreasing length
-      * @param angle  Angle between child and root
-      * @param color  Color of childs
-      *
-      * @return A Subtree with given node as root and a left & right child
-      */
-    def mkSubTree(leaf: Node[L2D],
-                      factor: Double,
-                      angle: Double,
-                      color: Color): Branch[L2D] = {
-      //Create new childs
-      val leftNode = Node(leaf.value.left(factor, angle, color))
-      val rightNode = Node(leaf.value.right(factor, angle, color))
-
-      //Return subtree
-      Branch(leaf, Branch(leftNode, rightNode))
+    def NewLevel(tree: Tree[L2D], level: Int, depth: Int): Branch[L2D] = tree match {
+      case Node(root) => NewBranch(Node(root), factor, angle, colorMap(level))
+      case Branch(Node(root), Branch(Node(left), Node(right))) =>
+        Branch(Node(root), Branch(
+          NewBranch(Node(left), factor, angle, colorMap(level)),
+          NewBranch(Node(right), factor, angle, colorMap(level))
+        ))
+      case Branch(Node(root), Branch(left, right)) =>
+        Branch(Node(root), Branch(NewLevel(left, depth + 1, depth), NewLevel(right, depth + 1, depth)))
     }
 
-    /**
-      * creates a tree with a certain depth.
-      * @param currentTree Current tree (will be increased to given level)
-      * @param depth    Depth start value
-      * @param maxDepth Maximum depth of tree. limited by amount of colors
-      * @return
-      */
-    def mkTree(currentTree: Tree[L2D],
-                   depth: Int,
-                   maxDepth: Int): Tree[L2D] = {
-      if (depth == maxDepth)
-        currentTree
-      else {
-        /** add a new level to the tree
-          * A tree can look like:
-          *   Node(x) => Its a level 0 tree(just root). Create a subtree out of it. (create Level 1)
-          *   Branch(Node,Branch(Node,Node) => It is a leaf. In this case a new level needs to added
-          *   Branch(Node(Branch(Branch,Branch) => Somewhere in the middle of the tree. Just iterate further
-          * @param tree - Tree to verify and add new level is possible in this iteration
-          * @param currentLevel - current level of iteration. Defines color for new possible created level
-          * @return Tree with new level if neccessary in given iteration.
-          */
-        def addNewLevel(tree: Tree[L2D], currentLevel: Int): Branch[L2D] = {
-          tree match {
-            case Node(root) =>
-              /*lv1: only root --> Create branch */
-              mkSubTree(Node(root), factor, angle, colorMap(currentLevel))
-            case Branch(Node(root), Branch(Node(left), Node(right))) =>
-              /*leaf --> new lvl */
-              val newLeftSubtree =
-                mkSubTree(Node(left), factor, angle, colorMap(currentLevel))
-              val newRightSubtree =
-                mkSubTree(Node(right), factor, angle, colorMap(currentLevel))
-              Branch(Node(root), Branch(newLeftSubtree, newRightSubtree))
-            case Branch(Node(root), Branch(left, right)) =>
-              /*subtree inside tree --> go deeper on both sides and increase level*/
-              Branch(Node(root),
-                Branch(addNewLevel(left, depth + 1),
-                  addNewLevel(right, depth + 1)))
-          }
-        }
-        mkTree(addNewLevel(currentTree, depth), depth + 1, maxDepth)
-      }
+    def NewTree(tree: Tree[L2D], depth: Int, maxDepth: Int): Tree[L2D] = depth match {
+      case `maxDepth` => tree
+      case _ => NewTree(NewLevel(tree, depth, depth), depth + 1, maxDepth)
     }
-    // Create initial Root node / Tree according to depth
-    val rootNode: Tree[L2D] = Node(
-      L2D(start, initialAngle, length, colorMap(0)))
-    // Append tree
-    treeDepth match {
-      case 0 => rootNode
-      case _ => mkTree(rootNode, 0, treeDepth)
-    }
+
+    require(treeDepth <= colorMap.size - 1)
+
+    if (treeDepth == 0) { return Node(L2D(start, initialAngle, length, colorMap(0))) }
+
+    NewTree(Node(L2D(start, initialAngle, length, colorMap(0))), 0, treeDepth)
   }
 }
-
-
 
 object L2D {
 
   import MathUtil._
-
 
   /**
     * Given a startpoint, an angle and a length the endpoint of the line
@@ -165,13 +108,15 @@ object L2D {
     * @param color the color
     * @return
     */
-  def apply(start: Pt2D, angle: AngleInDegrees, length: Double, color: Color): L2D = {
+  def apply(start: Pt2D,
+            angle: AngleInDegrees,
+            length: Double,
+            color: Color): L2D = {
     val angleInRadiants = toRadiants(angle)
     val end = Pt2D(start.x + length * Math.cos(angleInRadiants),
       start.y + length * Math.sin(angleInRadiants)).normed
     new L2D(start, end, color)
   }
-
 
 }
 
@@ -184,14 +129,14 @@ case class L2D(start: Pt2D, end: Pt2D, color: Color) {
   lazy val angle = {
     assert(!((xDist == 0) && (yDist == 0)))
     (xDist, yDist) match {
-      case (x, 0) if x > 0 => 0
-      case (0, y) if y > 0 => 90
-      case (0, y) if y < 0 => 270
-      case (x, 0) if x < 0 => 180
+      case (x, 0) if x > 0          => 0
+      case (0, y) if y > 0          => 90
+      case (0, y) if y < 0          => 270
+      case (x, 0) if x < 0          => 180
       case (x, y) if x < 0 && y < 0 => Math.atan(y / x) * 180 / Math.PI + 180
       case (x, y) if x < 0 && y > 0 => Math.atan(y / x) * 180 / Math.PI + 180
       case (x, y) if x > 0 && y < 0 => Math.atan(y / x) * 180 / Math.PI + 360
-      case (x, y) => Math.atan(y / x) * 180 / Math.PI
+      case (x, y)                   => Math.atan(y / x) * 180 / Math.PI
     }
   }
 
