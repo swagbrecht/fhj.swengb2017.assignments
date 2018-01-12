@@ -9,22 +9,40 @@
 | Actual Hours
 | Description
 
-| Arneitzj15
-| 29.11.17
+| Derler
+| 27.12.17
+| 3
 | 2
-| 1
-| Review of this and that
+| Modifying FXML in Scene Builder
 
-| Arneitzj15
-| 30.11.17
+| Derler
+| 28.12.17
+| 3
+| 4
+| Implementing CSS and inserting pictures
+
+| Derler
+| 28.12.17
+| 3
+| 3
+| Polishing design
+
+| Heider
+| 28.12.17
 | 1
+| 1
+| Reviewing given code and compare to Maze
+
+| Heider
+| 28.12.17
 | 5
-| implemented css
+| 7
+| Implementing ability to save and load
 
-| Heiderst16
-| 11.07.17
-| 2
-| 2
-| fixed bugs
+| Derler/Heider
+| 29.12.17
+| 4
+| 8
+| Implementing Slider and bug fixing
 
 |===
