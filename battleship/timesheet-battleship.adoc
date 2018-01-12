@@ -1,48 +1,111 @@
 == Time expenditure: battleship assignment
 
-[cols="1,1,1, 1,4", options="header"]
+[cols="1,2,1,4", options="header"]
 .Time expenditure
 |===
 | Student
 | Date
-| Estimated Hours
 | Actual Hours
 | Description
 
-| Derler
-| 27.12.17
-| 3
-| 2
-| Modifying FXML in Scene Builder
-
-| Derler
-| 28.12.17
-| 3
+| leifertv15
+| 2017-12-20
 | 4
-| Implementing CSS and inserting pictures
+| Organisational steps, project-report layout, to-do file, project team introduction
 
-| Derler
-| 28.12.17
-| 3
-| 3
-| Polishing design
-
-| Heider
-| 28.12.17
-| 1
-| 1
-| Reviewing given code and compare to Maze
-
-| Heider
-| 28.12.17
+| leifertv15
+| 2017-12-27
 | 5
-| 7
-| Implementing ability to save and load
+| Task allocation, group photo, WBS, time/cost estimation, mock ups, planning of next meeting
 
-| Derler/Heider
-| 29.12.17
+| derlermi16
+| 2017-12-27
+| 5
+| Task allocation, group photo, WBS, time/cost estimation, mock ups, planning of next meeting
+
+| heiderst16
+| 2017-12-27
+| 5
+| Task allocation, group photo, WBS, time/cost estimation, mock ups, planning of next meeting
+
+| lambrech16
+| 2017-12-27
+| 5
+| Task allocation, group photo, WBS, time/cost estimation, mock ups, planning of next meeting
+
+| leifertv15
+| 2017-12-28
 | 4
-| 8
-| Implementing Slider and bug fixing
+| Digitalizing Splash Screens (PS)
+
+| leifertv15
+| 2017-12-30
+| 3
+| Digitalizing Splash Screens (Word)
+
+| lambrech16
+| 2017-12-30
+| 3
+| Digitalizing Splash Screens (Word)
+
+| leifertv15
+| 2018-01-01
+| 1
+| Digitalizing Splash Screens (Word)
+
+| lambrech16
+| 2018-01-02
+| 1
+| WBS Diagram
+
+| leifertv15
+| 2018-01-05
+| 6
+| Refining Splash Screens
+
+| heiderst16
+| 2018-01-05
+| 6
+| Refining Splash Screens
+
+| derlermi16
+| 2018-01-05
+| 6
+| Refining Splash Screens
+
+| lambrech16
+| 2018-01-05
+| 4
+| Refining Splash Screens
+
+| lambrech16
+| 2018-01-05
+| 1
+| Research on and deciding for software license
+
+| leifertv15
+| 2018-01-05
+| 1.25
+| Work-Package Responsibilities
+
+| derlermi16
+| 2018-01-05
+| 1.25
+| Work-Package Responsibilities
+
+| heiderst16
+| 2018-01-05
+| 1.25
+| Work-Package Responsibilities
+
+| lambrech16
+| 2018-01-05
+| 1.25
+| Work-Package Responsibilities
+
+| lambrech16
+| 2018-01-05
+| 1
+| Project Report
 
 |===
